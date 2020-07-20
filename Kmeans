@@ -1,0 +1,21 @@
+from sklearn.cluster import KMeans
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+iris = datasets.load_iris()
+
+x = iris.data
+x = x[:,2:4] #取花瓣得長度和寬度
+
+#建立模型
+KM = KMeans(n_clusters=5) #n_clusters = K值
+KM.fit(x)
+
+#init:'random'/'k-means++'/自行給定
+#max_iter 最多迭代次數 (停損點)
+#tol 中心點誤差忍受(最好不要設0)
+#random_state 隨機種子
+KM.predict(x)
+plt.scatter(x[:,0],x[:,1],c=KM.predict(x))
