@@ -1,0 +1,12 @@
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.cluster import DBSCAN
+#Load Data
+iris = datasets.load_iris()
+X=iris.data
+X = X[:,2:4] #使用後面兩個特徵
+clustering = DBSCAN(eps=0.3,min_samples=10).fit(X)
+clustering
+clustering.labels_
+plt.scatter(X[:,0],X[:,1],c=clustering.labels_)
+y = iris.target
