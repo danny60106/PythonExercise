@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn import datasets
+iris = datasets.load_iris()
+X = iris.data
+X = X[:,2:4]
+#n_clusters:要分成幾群，給定數值
+#affinity:距離計算方式，"euclidean","l1","l2","manhattan","cosine"...
+#linkage:群與群之間的距離，"ward","complete","average","single"
+
+from sklearn.cluster import AgglomerativeClustering
+ml = AgglomerativeClustering(n_clusters=5,affinity = 'euclidean',linkage='ward')
+ml.fit_predict(X)
+#Scipy
+#metric:距離計算方式
+#method:群與群之間的計算方式，"single","complete","average","weighted","centroid"
+#,"medion","ward"
+
+import scipy.cluster.hierarchy as sch
+dis = sch.linkage(X,metric = 'euclidean',method="ward")
+sch.dendrogram(dis)
+plt.title("Hierarchical Clustering")
+plt.show()
+
+max_dis=5
+clusters = sch.fcluster(dis,max_dis,criterion='distance')
+plt.scatter(X[:,0],X[:,1],c=ml.fit_predict(X))
+k=3
+clusters=sch.fcluster(dis,k,criterion='maxclust')
+plt.scatter(X[:,0],X[:,1],c=clusters)
