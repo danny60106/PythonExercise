@@ -1,12 +1,18 @@
 import matplotlib.pyplot as plt
-from sklearn import datasets
+from sklearn.datasets import make_moons
 from sklearn.cluster import DBSCAN
-#Load Data
-iris = datasets.load_iris()
-X=iris.data
-X = X[:,2:4] #使用後面兩個特徵
-clustering = DBSCAN(eps=0.3,min_samples=10).fit(X)
-clustering
-clustering.labels_
-plt.scatter(X[:,0],X[:,1],c=clustering.labels_)
-y = iris.target
+
+plt.style.use('ggplot')
+%matplotlib inline
+
+X , label = make_moons(n_samples=200, noise = 0.1, random_state = 19)
+X
+model = DBSCAN(eps=0.25, min_samples=12).fit(X)
+model
+model.labels_
+model.core_sample_indices_
+
+fig, ax = plt.subplots(figsize=(10,8))
+sctr = ax.scatter(X[:,0], X[:,1], c=model.labels_, s =140, 
+                  alpha=0.9,cmap=plt.cm.Set1)
+fig.show()
