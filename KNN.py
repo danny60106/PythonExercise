@@ -16,7 +16,7 @@ y=iris.target
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.3,random_state=1)
 
 #建模
-#n_neighbor:K
+#n_neighbor:K(預設5)
 #weights:'uniform'最好使用奇數K值 /'distance'加權 /其他
 #algorithm:'auto'/'brute'/'kd_tree'/'ball_tree'
 #p:1 曼哈頓距離 / p:2歐基里德距離 / 其他: 明氏距離
